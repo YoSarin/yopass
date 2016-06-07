@@ -1,0 +1,175 @@
+﻿&#xFEFF;<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!--
+            Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+            For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *">
+        <title>YoPass</title>
+
+        <!-- YoPass references -->
+        <link href="css/index.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom.structure.min.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom.theme.min.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom.icons.min.css" />
+		<style>
+		    /* For avoiding title truncation in wp8 */
+		    .ui-header .ui-title {
+				    overflow: visible !important;
+		    }
+		    /* For fixing the absolute position issue for the default cordova gen page*/
+		    #cjp-accordion1 .app {
+				    left: 5px !important;
+				    margin: 5px !important;
+				    position: relative !important;
+		    }
+		</style>
+    </head>
+    <body class="ui-nosvg">
+        <div data-role="page" id="splash">
+        </div>
+
+		<div data-role="page" id="login">
+			<div data-role="header">
+				<h1>Login</h1>
+			</div>
+
+			<div role="main" class="ui-content">
+                <select name="walletList" id="walletList">
+                </select>
+				<p>Please provide password for chosen wallet</p>
+                <input type="password" name="password" id="password" />
+
+                <div data-role="controlgroup">
+                    <a href="#list" data-role="button" data-icon="forward">Go ahead</a>
+                    <a href="#newWallet" data-role="button" data-icon="plus">Create new wallet</a>
+                </div>
+                <a href="#removeWallet" data-role="button" data-icon="delete">Delete selected wallet</a>
+            </div>
+
+			<div data-role="footer" data-position="fixed">
+				<h4>|-|</h4>
+			</div>
+		</div>
+
+        <div data-role="page" id="newWallet">
+            <div data-role="header">
+                <h1>Create new wallet</h1>
+            </div>
+
+            <div role="main" class="ui-content">
+                <p>Please provide informations about wallet</p>
+                <label for="name">Name</label><input type="text" name="name" />
+                <label for="password">Password</label><input type="password" name="password" />
+                <a href="#createWallet" data-role="button">Create</a>
+                <a href="#login" data-role="button">Cancel</a>
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <h4>|-|</h4>
+            </div>
+
+        </div>
+
+        <div data-role="page" id="list">
+            <div data-role="header">
+                <h1></h1>
+            </div>
+
+            <div role="main" class="ui-content">
+                <div class="data"></div>
+                <div data-role="controlgroup">
+                    <a href="#addPassword" data-role="button" data-icon="plus">Add record</a>
+                    <a href="#login" data-role="button" data-icon="back">Close Wallet</a>
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>Wallet detail</h4>
+            </div>
+        </div>
+
+        <div data-role="page" id="editPassword">
+            <div data-role="header">
+                <h1>Edit password</h1>
+            </div>
+
+            <div role="main" class="ui-content">
+                <form data-role="field-contain">
+                </form>
+                <div data-role="controlgroup">
+                    <a href="#list" class="savePassword" data-role="button" data-icon="check">Save</a>
+                    <a href="" class="generatePassword" data-role="button" data-icon="refresh">Generate new password</a>
+                    <a href="#list" data-role="button" data-icon="back">Cancel</a>
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>Edit password</h4>
+            </div>
+        </div>
+
+        <!-- WAIT -->
+        <div id="wait">
+        </div>
+        
+        <!-- Redirects -->
+        <div data-role="page" id="addPassword">
+            <a href="#editPassword" data-role="button">Continue</a>
+        </div>
+
+        <!-- API placeholders-->
+        <div data-role="page" id="createWallet" class="wait">
+            <!--
+            CreateWallet failed
+            <a href="#login" data-role="button">Go Back</a>
+            -->
+        </div>
+
+        <div data-role="page" id="removeWallet" class="wait">
+            <!--
+            RemoveWallet failed
+            <a href="#login" data-role="button">Go Back</a>
+            -->
+        </div>
+
+        <div data-role="page" id="savePassword" class="wait">
+            <!--
+            Save Password failed
+            <a href="#list" data-role="button">Go Back</a>
+            -->
+        </div>
+
+        <!-- Templates -->
+        <div class="hidden" id="templates">
+            <option class="walletItem" value="test">Option title</option>
+            <div class="password">
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <h2 class="name">Name</h2>
+                    <a class="edit" data-role="button" data-icon="gear">Edit</a><a class="remove" data-role="button" data-icon="delete">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <script src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+        <script type="text/javascript" id="jqm-trans-disable">
+            /* For having a faster transition */
+            $(document).on("mobileinit", function () {
+                $.mobile.defaultPageTransition = "none";
+                $.mobile.defaultDialogTransition = "none";
+                $.mobile.buttonMarkup.hoverDelay = 0;
+            });
+        </script>
+        <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+        <script src="js/platformOverrides.js"></script>
+        <script src="js/aes.js"></script>
+        <script src="js/pbkdf2.js"></script>
+        <script src="js/model/provider.js"></script>
+        <script src="js/model/yopass.js"></script>
+        <script src="js/model/password.js"></script>
+        <script src="js/model/wallet.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
