@@ -51,10 +51,10 @@
                 <select name="walletList" id="walletList">
                 </select>
 				<p>Please provide password for chosen wallet</p>
-                <input type="password" name="password" id="password" />
+                <input type="password" name="password" id="password" class="submitOnEnter" rel="openWalletBtn" />
 
                 <div data-role="controlgroup">
-                    <a href="#list" data-role="button" data-icon="forward">Go ahead</a>
+                    <a href="#list" data-role="button" data-icon="forward" id="openWalletBtn">Go ahead</a>
                     <a href="#newWallet" data-role="button" data-icon="plus">Create new wallet</a>
                 </div>
                 <a class="confirm" href="#removeWallet" data-role="button" data-icon="delete">Delete selected wallet</a>
@@ -156,12 +156,12 @@
             <option class="walletItem" value="test">Option title</option>
             <div class="password">
                 <h2 class="name">Name</h2>
-                <small><span class="username"></span></small>
-                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <div class="links" data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <a class="copy" data-role="button" data-icon="star">Copy password</a>
                     <a class="edit" data-role="button" data-icon="gear">Edit</a>
                     <a class="remove" data-role="button" data-icon="delete">Delete</a>
                 </div>
+                <small><span class="username"></span></small>
             </div>
         </div>
 

@@ -32,6 +32,18 @@
         __self__._passwords = pass.sort(function (a, b) { return a.getTitle().toLowerCase() > b.getTitle().toLowerCase() ? 1 : b.getTitle().toLowerCase() > a.getTitle().toLowerCase() ? -1 : 0; });
     };
 
+    this.usedUsernames = function () {
+        var names = [];
+        $.each(this._passwords, function (key, value) {
+            if (value && $.inArray(value.getUsername(), names) === -1) {
+                names.push(value.getUsername());
+            }
+        });
+
+        names.sort();
+        return names;
+    };
+
     this.name = function () {
         return this._name;
     };

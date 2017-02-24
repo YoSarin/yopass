@@ -34,6 +34,14 @@
             return false;
         });
 
+        $('.submitOnEnter').keypress(function (e) {
+            if (e.which == 13) {
+                var target = $(this).attr('rel');
+                $('#' + target).click();
+                return false;    //<---- Add this line
+            }
+        });
+
         $('#login').on('pagebeforeshow', function (event) {
             loadData(prepareLoginPage);
         });
@@ -83,10 +91,19 @@
                                 $(':mobile-pagecontainer').pagecontainer('change', $('#editPassword'));
                             });
                             $(html).find('.remove').click(function () {
-                                wallet.removePassword(p);
-                                wallet.encrypt(pass);
-                                wallet.save(YoPass.DB());
-                                $(html).remove();
+                                navigator.notification.confirm(
+                                    'Are you sure?',
+                                     function (index) {
+                                         if (index === 1) {
+                                             wallet.removePassword(p);
+                                             wallet.encrypt(pass);
+                                             wallet.save(YoPass.DB());
+                                             $(html).remove();
+                                         }
+                                     },
+                                    'Confirmation',
+                                    ['Yes', 'No']
+                                );
                             });
                             $('#list .data').append(html);
                         });
@@ -205,29 +222,50 @@
 
                 callback(wallet);
             } catch (e) {
-                $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
+                navigator.notification.alert("Sorry, something is broken :(", function () {
+                    $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
+                }, "It is broken!");
+                console.log(e);
             }
         });
     }
 
-    function fillPasswordForm(password) {
+    function fillPasswordForm(password, wallet) {
         var p = typeof password === 'undefined' ? new Password() : password;
         $('#editPassword form').html('');
 
-        $.each(p.dict(), function (key, item) {
-            var sanitizedKey = key.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_');
-            $('<label>', { for: sanitizedKey }).text(key).appendTo('#editPassword form');
-            $('<input>', { name: sanitizedKey, rel: key, value: item, type: 'text' }).appendTo('#editPassword form');
-        });
+        loadWallet(function (wallet) {
+            var pass = $('#password').val();
+            wallet.decrypt(pass);
 
-        $('#editPassword form').trigger('create');
-        $('#editPassword .generatePassword').click(function () {
-            $('#editPassword input[name=password]').val(Password.generate());
-        });
-        $('#editPassword .savePassword').click(function () {
-            loadWallet(function (wallet) {
-                var pass = $('#password').val();
-                wallet.decrypt(pass);
+            var usernames = wallet.usedUsernames()
+
+            $.each(p.dict(), function (key, item) {
+                var sanitizedKey = key.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_');
+                var label = $('<label>', { for: sanitizedKey }).text(key).appendTo('#editPassword form');
+                if (key === 'username' && item == '' && usernames.length > 0) {
+                    var select = $('<select>', { name: sanitizedKey, rel: key }).appendTo('#editPassword form');
+                    $.each(usernames, function (key, username) {
+                        $('<option>', { value: username, text: username }).appendTo(select);
+                    });
+                    var newUser = $('<option>', { text: "new username" }).appendTo(select);
+                    select.change(function () {
+                        if (newUser.is(':selected')) {
+                            select.remove();
+                            var input = $('<input>', { name: sanitizedKey, rel: key, value: item, type: 'text' }).insertAfter(label);
+                            input.textinput();
+                        }
+                    });
+                } else {
+                    $('<input>', { name: sanitizedKey, rel: key, value: item, type: 'text' }).appendTo('#editPassword form');
+                }
+            });
+
+            $('#editPassword form').trigger('create');
+            $('#editPassword .generatePassword').click(function () {
+                $('#editPassword input[name=password]').val(Password.generate());
+            });
+            $('#editPassword .savePassword').click(function () {
                 wallet.removePassword(p);
                 var values = {};
                 $.each($('#editPassword form').serializeArray(), function (key, item) {
@@ -239,9 +277,10 @@
                     $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
                     $('#editPassword .savePassword').removeClass('hidden');
                 });
+
+                $('#editPassword .savePassword').addClass('hidden');
+                return false;
             });
-            $('#editPassword .savePassword').addClass('hidden');
-            return false;
         });
     }
 
