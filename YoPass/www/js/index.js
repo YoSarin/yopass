@@ -35,7 +35,7 @@
         });
 
         $('.submitOnEnter').keypress(function (e) {
-            if (e.which == 13) {
+            if (e.which === 13) {
                 var target = $(this).attr('rel');
                 $('#' + target).click();
                 return false;    //<---- Add this line
@@ -238,12 +238,12 @@
             var pass = $('#password').val();
             wallet.decrypt(pass);
 
-            var usernames = wallet.usedUsernames()
+            var usernames = wallet.usedUsernames();
 
             $.each(p.dict(), function (key, item) {
                 var sanitizedKey = key.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_');
                 var label = $('<label>', { for: sanitizedKey }).text(key).appendTo('#editPassword form');
-                if (key === 'username' && item == '' && usernames.length > 0) {
+                if (key === 'username' && item === '' && usernames.length > 0) {
                     var select = $('<select>', { name: sanitizedKey, rel: key }).appendTo('#editPassword form');
                     $.each(usernames, function (key, username) {
                         $('<option>', { value: username, text: username }).appendTo(select);

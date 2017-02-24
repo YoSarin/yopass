@@ -7,7 +7,7 @@
     __self__._readyList = [];
     __self__._ready = false;
     __self__._db = window.sqlitePlugin.openDatabase({ name: __self__._dbName, location: 2 });
-    __self__._onReady = $.Callbacks()
+    __self__._onReady = $.Callbacks();
 
     __self__.db = function () {
         return this._db;
