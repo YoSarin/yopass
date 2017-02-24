@@ -10,17 +10,17 @@
     this.addPassword = function (password) {
         this._passwords.push(password);
         __self__.sort();
-    }
+    };
 
     this.removePassword = function (password) {
         $.each(this._passwords, function (key, pass) {
-            if (pass.getTitle() == password.getTitle()) {
+            if (pass.getTitle() === password.getTitle()) {
                 __self__._passwords[key] = null;
             }
         });
 
         __self__.sort();
-    }
+    };
 
     this.sort = function () {
         var pass = [];
@@ -30,26 +30,26 @@
             }
         });
         __self__._passwords = pass.sort(function (a, b) { return a.getTitle().toLowerCase() > b.getTitle().toLowerCase() ? 1 : b.getTitle().toLowerCase() > a.getTitle().toLowerCase() ? -1 : 0; });
-    }
+    };
 
     this.name = function () {
         return this._name;
-    }
+    };
 
     this.passwords = function () {
         return this._passwords;
-    }
+    };
 
     this.decrypt = function (pass) {
         var decryptedKey = $.parseJSON(CryptoJS.AES.decrypt(this._keyEncrypted, pass).toString(CryptoJS.enc.Utf8));
         if (this._dataEncrypted) {
-            var pass = $.parseJSON(CryptoJS.AES.decrypt(this._dataEncrypted, decryptedKey.key, { 'iv': decryptedKey.iv }).toString(CryptoJS.enc.Utf8));
-            $.each(pass, function (key, item) {
+            var passDecrypted = $.parseJSON(CryptoJS.AES.decrypt(this._dataEncrypted, decryptedKey.key, { 'iv': decryptedKey.iv }).toString(CryptoJS.enc.Utf8));
+            $.each(passDecrypted, function (key, item) {
                 __self__._passwords.push(Password.fromDict(item));
             });
         }
         __self__.sort();
-    }
+    };
 
     this.encrypt = function (pass) {
         var salt = CryptoJS.lib.WordArray.random(128 / 8);
@@ -62,7 +62,7 @@
             passList.push(pass.dict());
         });
         this._dataEncrypted = CryptoJS.AES.encrypt(JSON.stringify(passList), key, { 'iv': iv }).toString();
-    }
+    };
 
     this.save = function (db, callback) {
         if (this._id) {
@@ -70,7 +70,7 @@
         } else {
             db.query('INSERT INTO wallet (name, encryptedKey, data) VALUES (?,?,?)', [this._name, this._keyEncrypted, this._dataEncrypted], callback);
         }
-    }
+    };
 }
 
 Wallet.load = function (id, name, keyEncrypted, dataEncrypted) {
@@ -80,7 +80,7 @@ Wallet.load = function (id, name, keyEncrypted, dataEncrypted) {
     w._keyEncrypted = keyEncrypted;
     w._dataEncrypted = dataEncrypted;
     return w;
-}
+};
 
 Wallet.delete = function (db, id, callback) {
     db.query(
@@ -88,4 +88,4 @@ Wallet.delete = function (db, id, callback) {
         [parseInt(id)],
         callback
     );
-}
+};

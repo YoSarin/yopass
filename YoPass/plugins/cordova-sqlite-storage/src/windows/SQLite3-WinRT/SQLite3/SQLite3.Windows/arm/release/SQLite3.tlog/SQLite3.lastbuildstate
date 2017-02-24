@@ -1,2 +1,0 @@
-#TargetFrameworkVersion=:PlatformToolSet=v120:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
-release|arm|C:\Users\yosarin\SkyDrive\Dokumenty\dev\YoPass\YoPass\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows\|

@@ -11,23 +11,51 @@
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
-        
+
         $(document).bind('mobileinit', function () {
             $.mobile.loader.prototype.options.text = "loading";
             $.mobile.loader.prototype.options.textVisible = false;
             $.mobile.loader.prototype.options.theme = "a";
             $.mobile.loader.prototype.options.html = "";
-        });        
+        });
+
+        $('.confirm').click(function (ev) {
+            var target = $(this).attr('href');
+            navigator.notification.confirm(
+                'Are you sure?',
+                 function (index) {
+                     if (index === 1) {
+                         $(':mobile-pagecontainer').pagecontainer('change', $(target));
+                     }
+                 },
+                'Confirmation',
+                ['Yes', 'No']
+            );
+            return false;
+        });
 
         $('#login').on('pagebeforeshow', function (event) {
             loadData(prepareLoginPage);
         });
 
+        $('#login').on('pageshow', function (event) {
+            $("#login input").first().focus();
+        });
+
+        $('#addPassword').on('pagebeforeshow', function (event) {
+            fillPasswordForm();
+            $(':mobile-pagecontainer').pagecontainer('change', $('#editPassword'));
+        });
+
         $('#editPassword').on('pagebeforeshow', function (event) {
         });
 
+        $('#editPassword').on('pageshow', function (event) {
+            $("#editPassword input").first().focus();
+        });
+
         $('#list').on('pagebeforeshow', function (event) {
-            if ($('#walletList').val() == null || !$('#password').val()) {
+            if ($('#walletList').val() === null || !$('#password').val()) {
                 $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
                 return;
             }
@@ -42,11 +70,14 @@
                             var html = $("#templates .password").clone();
                             $(html).find('.name').text(p.getTitle());
                             $(html).find('.username').text(p.getUsername());
-                            $(html).find('.copy').click(function () {
-                                var clipboard = Windows.ApplicationModel.DataTransfer.Clipboard;
-                                console.log(clipboard);
-                                console.log(clipboard.setContent('test'));
-                            });
+                            if (typeof Windows.ApplicationModel.DataTransfer.Clipboard !== 'undefined') {
+                                $(html).find('.copy').click(function () {
+                                    var clipboard = Windows.ApplicationModel.DataTransfer.Clipboard;
+                                    var content = Windows.ApplicationModel.DataTransfer.DataPackage();
+                                    content.setText(p.getPassword());
+                                    clipboard.setContent(content);
+                                });
+                            }
                             $(html).find('.edit').click(function () {
                                 fillPasswordForm(p);
                                 $(':mobile-pagecontainer').pagecontainer('change', $('#editPassword'));
@@ -78,7 +109,7 @@
                 var key = CryptoJS.PBKDF2(pass, salt, { keySize: 1024 / 32, iterations: iters }).toString();
                 var encryptedKey = CryptoJS.AES.encrypt(JSON.stringify({ 'key': key, 'salt': salt, 'iv': iv }), pass).toString();
                 var encryptedData = CryptoJS.AES.encrypt(JSON.stringify([]), key, { 'iv': iv }).toString();
-                
+
                 $("#newWallet input[name='password']").val('');
                 $("#newWallet input[name='name']").val('');
 
@@ -89,10 +120,14 @@
                         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
                     }
                 );
-                
+
             } else {
                 $(':mobile-pagecontainer').pagecontainer('change', $('#newWallet'));
             }
+        });
+        
+        $('#newWallet').on('pageshow', function (event) {
+            $("#newWallet input").first().focus();
         });
 
         $('#removeWallet').on('pagebeforeshow', function (event) {
@@ -111,18 +146,17 @@
             $("#newWallet input[name='password']").val('');
             $("#newWallet input[name='name']").val('');
         });
-
         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
 
-    };
+    }
 
     function onPause() {
         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
-    };
+    }
 
     function onResume() {
         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
-    };
+    }
 
     function prepareLoginPage(wallets) {
         var selected = $('#walletList').val();
@@ -137,13 +171,13 @@
             option.text(item.name);
             $('#walletList').append(option);
         });
-        if (!selected || typeof wallets[parseInt(selected)] == 'undefined') {
+        if (!selected || typeof wallets[parseInt(selected)] === 'undefined') {
             $('#walletList option').first().attr('selected', true);
         } else {
             $('#walletList').val(selected);
         }
         $('#walletList').selectmenu('refresh');
-    };
+    }
 
     function loadData(callback) {
         YoPass.DB().query(
@@ -160,7 +194,7 @@
                 console.log(err);
             }
         );
-    };
+    }
 
     function loadWallet(callback) {
         loadData(function (wallets) {
@@ -177,7 +211,7 @@
     }
 
     function fillPasswordForm(password) {
-        var p = typeof password == 'undefined' ? new Password() : password;
+        var p = typeof password === 'undefined' ? new Password() : password;
         $('#editPassword form').html('');
 
         $.each(p.dict(), function (key, item) {

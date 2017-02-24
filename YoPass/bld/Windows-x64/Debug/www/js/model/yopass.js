@@ -4,7 +4,7 @@
 
     this.query = function (q, params, success, error) {
         __self__._provider.query(q, params, success, error);
-    }
+    };
 }
 
 YoPass._db = null;
@@ -15,4 +15,4 @@ YoPass.DB = function () {
         YoPass._db = new YoPass();
     }
     return YoPass._db;
-}
+};

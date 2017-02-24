@@ -3,31 +3,31 @@
     var __self__ = this;
 
     this._fields = {};
-    this._defaultFields = ['title', 'username', 'password']
+    this._defaultFields = ['title', 'username', 'password'];
 
     this.addField = function (name) {
         __self__._fields[name] = '';
-    }
+    };
 
     this.setValue = function (field, value) {
         __self__._fields[field] = value;
-    }
+    };
 
     this.getTitle = function () {
         return __self__._fields['title'];
-    }
+    };
 
     this.getUsername = function () {
         return __self__._fields['username'];
-    }
+    };
 
     this.getPassword = function () {
         return __self__._fields['password'];
-    }
+    };
 
     this.dict = function () {
         return __self__._fields;
-    }
+    };
 
     $.each(__self__._defaultFields, function (key, item) {
         __self__.addField(item);
@@ -38,7 +38,7 @@ Password.fromDict = function (dict) {
     p = new Password();
     p._fields = dict;
     return p;
-}
+};
 
 Password.flags = {
     lowercase : 1,
@@ -64,11 +64,11 @@ Password.generate = function (options) {
 
     var defaultOptions = { len: 15, flags: Password.flags.all(), safe: false };
 
-    if (typeof options == 'undefined') {
+    if (typeof options === 'undefined') {
         options = defaultOptions;
     } else {
         $.each(defaultOptions, function (key, value) {
-            if (typeof options[key] == 'undefined') {
+            if (typeof options[key] === 'undefined') {
                 options[key] = value;
             }
         });

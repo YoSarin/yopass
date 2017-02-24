@@ -19,9 +19,15 @@
     <DebuggerFlavor>PhoneDevice</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-AnyCPU'">
-    <DebuggerFlavor>PhoneDevice81</DebuggerFlavor>
+    <DebuggerFlavor>WindowsLocal</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-ARM'">
+    <DebuggerFlavor>PhoneDevice81</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Windows Phone (Universal)'">
+    <DebuggerFlavor>PhoneDevice81</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Windows Phone (Universal)'">
     <DebuggerFlavor>PhoneDevice81</DebuggerFlavor>
   </PropertyGroup>
 </Project>
