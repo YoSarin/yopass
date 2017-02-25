@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="io.cordova.YoPass" Publisher="CN=Apache Cordova Team" Version="1.0.0.0" ProcessorArchitecture="x64" />
+  <Identity Name="io.cordova.YoPass" Publisher="CN=Apache Cordova Team" Version="1.1.0.9" ProcessorArchitecture="x64" />
   <mp:PhoneIdentity PhoneProductId="40dd0010-fa03-11e6-90f0-77fda70e44df" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>YoPass</DisplayName>

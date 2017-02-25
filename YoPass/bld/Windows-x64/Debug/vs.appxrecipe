@@ -16,19 +16,19 @@
     <PackageRegistrationPath>
     </PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
-    <RegisteredManifestChecksum>33F010E7EF0D67C6930CBDEBBB841834B08BADA7DD8BB0E8271A0907751FC3B0</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>io.cordova.YoPass_1.0.0.0_x64__h35559jr9hy9m</RegisteredPackageMoniker>
+    <RegisteredManifestChecksum>8BD203C24C2159B5ECE1E260B9D9EAB48407CCEA81F24679937CC7E22BAB176F</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>io.cordova.YoPass_1.1.0.9_x64__h35559jr9hy9m</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>io.cordova.YoPass_h35559jr9hy9m!io.cordova.YoPass</RegisteredUserModeAppID>
     <RegisteredPackageID>io.cordova.YoPass</RegisteredPackageID>
     <RegisteredPackagePublisher>CN=Apache Cordova Team</RegisteredPackagePublisher>
-    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <RegisteredVersion>1.1.0.9</RegisteredVersion>
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\build\windows\debug\x64\win10\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-02-24T02:22:25.426</Modified>
+      <Modified>2017-02-25T00:30:35.760</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -485,15 +485,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\cordova-js-src\confighelper.js">
       <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
-      <Modified>2017-02-24T02:22:21.817</Modified>
+      <Modified>2017-02-25T00:30:32.009</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\cordova-js-src\exec.js">
       <PackagePath>www\cordova-js-src\exec.js</PackagePath>
-      <Modified>2017-02-24T02:22:21.819</Modified>
+      <Modified>2017-02-25T00:30:32.009</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\cordova-js-src\platform.js">
       <PackagePath>www\cordova-js-src\platform.js</PackagePath>
-      <Modified>2017-02-24T02:22:21.831</Modified>
+      <Modified>2017-02-25T00:30:32.009</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\cordova-js-src\splashscreen.js">
       <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
@@ -505,11 +505,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\cordova_plugins.js">
       <PackagePath>www\cordova_plugins.js</PackagePath>
-      <Modified>2017-02-24T02:22:21.832</Modified>
+      <Modified>2017-02-25T00:30:32.009</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\aes.js">
       <PackagePath>www\js\aes.js</PackagePath>
-      <Modified>2017-02-24T02:22:21.886</Modified>
+      <Modified>2017-02-25T00:30:32.056</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\core.js">
       <PackagePath>www\js\core.js</PackagePath>
@@ -517,23 +517,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\index.js">
       <PackagePath>www\js\index.js</PackagePath>
-      <Modified>2017-02-24T02:05:11.609</Modified>
+      <Modified>2017-02-25T00:28:22.448</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\jquery-1.11.1.min.js">
       <PackagePath>www\js\jquery-1.11.1.min.js</PackagePath>
-      <Modified>2017-02-24T02:22:21.967</Modified>
+      <Modified>2017-02-25T00:30:32.144</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\jquery.mobile.custom.min.js">
       <PackagePath>www\js\jquery.mobile.custom.min.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.033</Modified>
+      <Modified>2017-02-25T00:30:32.191</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\model\password.js">
       <PackagePath>www\js\model\password.js</PackagePath>
-      <Modified>2017-02-24T00:07:08.770</Modified>
+      <Modified>2017-02-24T23:41:59.061</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\model\provider.js">
       <PackagePath>www\js\model\provider.js</PackagePath>
-      <Modified>2017-02-24T00:33:24.817</Modified>
+      <Modified>2017-02-24T02:25:40.089</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\model\wallet.js">
       <PackagePath>www\js\model\wallet.js</PackagePath>
@@ -545,7 +545,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\pbkdf2.js">
       <PackagePath>www\js\pbkdf2.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.049</Modified>
+      <Modified>2017-02-25T00:30:32.207</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\platformOverrides.js">
       <PackagePath>www\js\platformOverrides.js</PackagePath>
@@ -553,23 +553,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js">
       <PackagePath>www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.074</Modified>
+      <Modified>2017-02-25T00:30:32.238</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\plugins\cordova-plugin-dialogs\www\notification.js">
       <PackagePath>www\plugins\cordova-plugin-dialogs\www\notification.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.075</Modified>
+      <Modified>2017-02-25T00:30:32.238</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.077</Modified>
+      <Modified>2017-02-25T00:30:32.238</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.107</Modified>
+      <Modified>2017-02-25T00:30:32.269</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
-      <Modified>2017-02-24T02:22:22.144</Modified>
+      <Modified>2017-02-25T00:30:32.310</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\scripts\platformOverrides.js">
       <PackagePath>www\scripts\platformOverrides.js</PackagePath>
@@ -585,11 +585,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\css\index.css">
       <PackagePath>www\css\index.css</PackagePath>
-      <Modified>2017-02-24T02:16:57.404</Modified>
+      <Modified>2017-02-25T00:30:31.760</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\css\notification.css">
       <PackagePath>www\css\notification.css</PackagePath>
-      <Modified>2017-02-24T02:22:21.833</Modified>
+      <Modified>2017-02-25T00:30:32.009</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\css\splashscreen.css">
       <PackagePath>www\css\splashscreen.css</PackagePath>
@@ -601,15 +601,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\jquery.mobile.custom.structure.min.css">
       <PackagePath>www\js\jquery.mobile.custom.structure.min.css</PackagePath>
-      <Modified>2017-02-24T02:22:22.040</Modified>
+      <Modified>2017-02-25T00:30:32.207</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\js\jquery.mobile.custom.theme.min.css">
       <PackagePath>www\js\jquery.mobile.custom.theme.min.css</PackagePath>
-      <Modified>2017-02-24T02:22:22.046</Modified>
+      <Modified>2017-02-25T00:30:32.207</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\index.html">
       <PackagePath>www\index.html</PackagePath>
-      <Modified>2017-02-24T02:22:23.005</Modified>
+      <Modified>2017-02-25T00:30:33.407</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\www\test.html">
       <PackagePath>www\test.html</PackagePath>
@@ -625,7 +625,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\config.xml">
       <PackagePath>config.xml</PackagePath>
-      <Modified>2017-02-24T02:22:21.496</Modified>
+      <Modified>2017-02-25T00:30:31.709</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.14393.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -634,7 +634,7 @@
     <AppxPackagedFile Include="C:\Users\yosarin\src\github.com\martin-reznik\yopass\YoPass\platforms\windows\build\windows\debug\x64\win10\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-02-24T02:22:23.839</Modified>
+      <Modified>2017-02-25T00:30:34.207</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

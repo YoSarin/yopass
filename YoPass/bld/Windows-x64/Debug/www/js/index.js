@@ -35,7 +35,7 @@
         });
 
         $('.submitOnEnter').keypress(function (e) {
-            if (e.which == 13) {
+            if (e.which === 13) {
                 var target = $(this).attr('rel');
                 $('#' + target).click();
                 return false;    //<---- Add this line
@@ -77,6 +77,9 @@
                         $.each(wallet.passwords(), function (key, p) {
                             var html = $("#templates .password").clone();
                             $(html).find('.name').text(p.getTitle());
+                            $(html).find('.name').dblclick(function () {
+                                navigator.notification.alert("Password: " + p.getPassword(), function () {}, "Keep it safe!");
+                            });
                             $(html).find('.username').text(p.getUsername());
                             if (typeof Windows.ApplicationModel.DataTransfer.Clipboard !== 'undefined') {
                                 $(html).find('.copy').click(function () {
@@ -114,6 +117,32 @@
                     }
                 });
             });
+        });
+
+        
+        $('#loadPasswords').on('pagebeforeshow', function (event) {
+            try {
+                loadWallet(function (wallet) {
+                    var pass = $('#password').val();
+                    wallet.decrypt(pass);
+
+                    var dataText = $('#dataToLoad').val();
+                    var data = $.parseJSON(dataText);
+                    $.each(data, function (k, val) {
+                        wallet.addPassword(Password.fromDict(val));
+                    });
+                    wallet.encrypt(pass);
+                    wallet.save(YoPass.DB(), function () {
+                        $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
+                    });
+                });
+            } catch (e) {
+                console.log(e);
+                navigator.notification.alert("Sorry, something is broken :(", function () {
+                    $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
+                }, "It is broken!");
+            }
+            $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
         });
 
         $('#createWallet').on('pagebeforeshow', function (event) {
@@ -238,12 +267,12 @@
             var pass = $('#password').val();
             wallet.decrypt(pass);
 
-            var usernames = wallet.usedUsernames()
+            var usernames = wallet.usedUsernames();
 
             $.each(p.dict(), function (key, item) {
                 var sanitizedKey = key.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_');
                 var label = $('<label>', { for: sanitizedKey }).text(key).appendTo('#editPassword form');
-                if (key === 'username' && item == '' && usernames.length > 0) {
+                if (key === 'username' && item === '' && usernames.length > 0) {
                     var select = $('<select>', { name: sanitizedKey, rel: key }).appendTo('#editPassword form');
                     $.each(usernames, function (key, username) {
                         $('<option>', { value: username, text: username }).appendTo(select);

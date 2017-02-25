@@ -11,6 +11,7 @@
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
+        document.addEventListener("backbutton", function () { window.history.back(); }, false);
 
         $(document).bind('mobileinit', function () {
             $.mobile.loader.prototype.options.text = "loading";
@@ -77,6 +78,9 @@
                         $.each(wallet.passwords(), function (key, p) {
                             var html = $("#templates .password").clone();
                             $(html).find('.name').text(p.getTitle());
+                            $(html).find('.name').dblclick(function () {
+                                navigator.notification.alert("Password: " + p.getPassword(), function () {}, "Keep it safe!");
+                            });
                             $(html).find('.username').text(p.getUsername());
                             if (typeof Windows.ApplicationModel.DataTransfer.Clipboard !== 'undefined') {
                                 $(html).find('.copy').click(function () {
@@ -114,6 +118,32 @@
                     }
                 });
             });
+        });
+
+        
+        $('#loadPasswords').on('pagebeforeshow', function (event) {
+            try {
+                loadWallet(function (wallet) {
+                    var pass = $('#password').val();
+                    wallet.decrypt(pass);
+
+                    var dataText = $('#dataToLoad').val();
+                    var data = $.parseJSON(dataText);
+                    $.each(data, function (k, val) {
+                        wallet.addPassword(Password.fromDict(val));
+                    });
+                    wallet.encrypt(pass);
+                    wallet.save(YoPass.DB(), function () {
+                        $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
+                    });
+                });
+            } catch (e) {
+                console.log(e);
+                navigator.notification.alert("Sorry, something is broken :(", function () {
+                    $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
+                }, "It is broken!");
+            }
+            $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
         });
 
         $('#createWallet').on('pagebeforeshow', function (event) {

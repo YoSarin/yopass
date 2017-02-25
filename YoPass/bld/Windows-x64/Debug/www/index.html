@@ -84,6 +84,23 @@
 
         </div>
 
+        <div data-role="page" id="uploadData">
+            <div data-role="header">
+                <h1></h1>
+            </div>
+
+            <div role="main" class="ui-content">
+                <textarea id="dataToLoad"></textarea>
+                <div data-role="controlgroup">
+                    <a href="#loadPasswords" data-role="button" data-icon="plus">Save to Wallet</a>
+                    <a href="#list" data-role="button" data-icon="back">Cancel</a>
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>Upload data</h4>
+            </div>
+        </div>
+
         <div data-role="page" id="list">
             <div data-role="header">
                 <h1></h1>
@@ -94,6 +111,7 @@
                 <div data-role="controlgroup">
                     <a href="#addPassword" data-role="button" data-icon="plus">Add record</a>
                     <a href="#login" data-role="button" data-icon="back">Close Wallet</a>
+                    <a href="#uploadData" data-role="button" data-icon="back">Add from JSON</a>
                 </div>
             </div>
             <div data-role="footer" data-position="fixed">
@@ -132,9 +150,16 @@
         <!-- API placeholders-->
         <div data-role="page" id="createWallet" class="wait">
             <!--
-            CreateWallet failed
-            <a href="#login" data-role="button">Go Back</a>
-            -->
+        CreateWallet failed
+        <a href="#login" data-role="button">Go Back</a>
+        -->
+        </div>
+
+        <div data-role="page" id="loadPasswords" class="wait">
+            <!--
+        CreateWallet failed
+        <a href="#login" data-role="button">Go Back</a>
+        -->
         </div>
 
         <div data-role="page" id="removeWallet" class="wait">

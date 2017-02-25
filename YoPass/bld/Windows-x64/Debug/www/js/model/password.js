@@ -3,7 +3,7 @@
     var __self__ = this;
 
     this._fields = {};
-    this._defaultFields = ['title', 'username', 'password'];
+    this._defaultFields = Password.defaultFields
 
     this.addField = function (name) {
         __self__._fields[name] = '';
@@ -36,7 +36,16 @@
 
 Password.fromDict = function (dict) {
     p = new Password();
-    p._fields = dict;
+    $.each(Password.defaultFields, function (k, name) {
+        if (name in dict) {
+            p._fields[name] = dict[name];
+        }
+    });
+    $.each(dict, function (name, value) {
+        if (value.trim() !== "" && Password.defaultFields.indexOf(name) === -1) {
+            p._fields[name] = value;
+        }
+    });
     return p;
 };
 
@@ -55,6 +64,8 @@ Password.flags = {
         return Password.flags.uppercase | Password.flags.numbers;
     }
 };
+
+Password.defaultFields = ['title', 'username', 'password'];
 
 Password.generate = function (options) {
     var lowercase = 'abcdefghijklmnopqrstuvwxyz';
