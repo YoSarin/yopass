@@ -4,6 +4,7 @@
     this._name = null;
     this._keyEncrypted = null;
     this._dataEncrypted = null;
+    this._fingerprintEnabled = false;
 
     this._passwords = [];
 
@@ -34,13 +35,18 @@
 
     this.usedUsernames = function () {
         var names = [];
+        var keys = {}
         $.each(this._passwords, function (key, value) {
-            if (value && $.inArray(value.getUsername(), names) === -1) {
-                names.push(value.getUsername());
+            if (value && value.getUsername() != "" && (!(value.getUsername() in keys))) {
+                keys[value.getUsername()] = names.push({ name: value.getUsername(), count: 1}) - 1;
+            } else if (value && value.getUsername() != "") {
+                names[keys[value.getUsername()]].count += 1;
             }
         });
 
-        names.sort();
+        names.sort(function (a, b) {
+            return b.count - a.count;
+        });
         return names;
     };
 
@@ -78,9 +84,9 @@
 
     this.save = function (db, callback) {
         if (this._id) {
-            db.query('UPDATE wallet SET name=?, encryptedKey=?, data=? WHERE id_wallet=?', [this._name, this._keyEncrypted, this._dataEncrypted, this._id], callback);
+            db.query('UPDATE wallet SET name=?, encryptedKey=?, data=?, fingerprint_enabled = ? WHERE id_wallet=?', [this._name, this._keyEncrypted, this._dataEncrypted, this._fingerprintEnabled, this._id], callback);
         } else {
-            db.query('INSERT INTO wallet (name, encryptedKey, data) VALUES (?,?,?)', [this._name, this._keyEncrypted, this._dataEncrypted], callback);
+            db.query('INSERT INTO wallet (name, encryptedKey, data, fingerprint_enabled) VALUES (?,?,?,?)', [this._name, this._keyEncrypted, this._dataEncrypted, this._fingerprintEnabled], callback);
         }
     };
 }

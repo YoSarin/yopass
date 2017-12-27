@@ -42,15 +42,14 @@
             </div>
         </div>
 
-		<div data-role="page" id="login">
-			<div data-role="header">
-				<h1>Login</h1>
-			</div>
+        <div data-role="page" id="login">
+            <div data-role="header">
+                <h1>Login</h1>
+            </div>
 
-			<div role="main" class="ui-content">
-                <select name="walletList" id="walletList">
-                </select>
-				<p>Please provide password for chosen wallet</p>
+            <div role="main" class="ui-content">
+                <select name="walletList" id="walletList"></select>
+                <p>Please provide password for chosen wallet</p>
                 <input type="password" name="password" id="password" class="submitOnEnter" rel="openWalletBtn" />
 
                 <div data-role="controlgroup">
@@ -60,10 +59,10 @@
                 <a class="confirm" href="#removeWallet" data-role="button" data-icon="delete">Delete selected wallet</a>
             </div>
 
-			<div data-role="footer" data-position="fixed">
-				<h4>|-|</h4>
-			</div>
-		</div>
+            <div data-role="footer" data-position="fixed">
+                <h4>|-|</h4>
+            </div>
+        </div>
 
         <div data-role="page" id="newWallet">
             <div data-role="header">
@@ -108,14 +107,19 @@
 
             <div role="main" class="ui-content">
                 <div class="data"></div>
-                <div data-role="controlgroup">
-                    <a href="#addPassword" data-role="button" data-icon="plus">Add record</a>
-                    <a href="#login" data-role="button" data-icon="back">Close Wallet</a>
-                    <a href="#uploadData" data-role="button" data-icon="back">Add from JSON</a>
-                </div>
             </div>
             <div data-role="footer" data-position="fixed">
-                <h4>Wallet detail</h4>
+                <div data-role="controlgroup" data-type="horizontal">
+                    <div class="one-third">
+                        <a href="#addPassword" data-role="button" data-icon="plus">Add record</a>
+                    </div>
+                    <div class="one-third">
+                        <a class="close-wallet" href="#login" data-role="button" data-icon="back">Close Wallet</a>
+                    </div>
+                    <div class="one-third">
+                        <a href="#uploadData" data-role="button" data-icon="back">Add from JSON/CSV</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -125,8 +129,7 @@
             </div>
 
             <div role="main" class="ui-content">
-                <form data-role="field-contain">
-                </form>
+                <form data-role="field-contain"></form>
                 <div data-role="controlgroup">
                     <a href="#list" class="savePassword" data-role="button" data-icon="check">Save</a>
                     <a href="" class="generatePassword" data-role="button" data-icon="refresh">Generate new password</a>
@@ -141,7 +144,7 @@
         <!-- WAIT -->
         <div id="wait">
         </div>
-        
+
         <!-- Redirects -->
         <div data-role="page" id="addPassword">
             <a href="#editPassword" data-role="button">Continue</a>
@@ -164,50 +167,58 @@
 
         <div data-role="page" id="removeWallet" class="wait">
             <!--
-            RemoveWallet failed
-            <a href="#login" data-role="button">Go Back</a>
-            -->
+        RemoveWallet failed
+        <a href="#login" data-role="button">Go Back</a>
+        -->
         </div>
 
         <div data-role="page" id="savePassword" class="wait">
             <!--
-            Save Password failed
-            <a href="#list" data-role="button">Go Back</a>
-            -->
+        Save Password failed
+        <a href="#list" data-role="button">Go Back</a>
+        -->
         </div>
 
         <!-- Templates -->
         <div class="hidden" id="templates">
             <option class="walletItem" value="test">Option title</option>
             <div class="password">
-                <h2 class="name">Name</h2>
+                <h2 class="name-container">
+                    <span class="name">Name</span>
+                    <small class="username"></small>
+                </h2>
                 <div class="links" data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <a class="copy" data-role="button" data-icon="star">Copy password</a>
-                    <a class="edit" data-role="button" data-icon="gear">Edit</a>
-                    <a class="remove" data-role="button" data-icon="delete">Delete</a>
+                    <div class="one-third">
+                        <a class="copy" data-role="button" data-icon="star">To Clipboard</a>
+                    </div>
+                    <div class="one-third">
+                        <a class="edit" data-role="button" data-icon="gear">Edit</a>
+                    </div>
+                    <div class="one-third">
+                        <a class="remove" data-role="button" data-icon="delete">Delete</a>
+                    </div>
                 </div>
-                <small><span class="username"></span></small>
             </div>
-        </div>
 
-        <script src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
-        <script type="text/javascript" id="jqm-trans-disable">
-            /* For having a faster transition */
-            $(document).on("mobileinit", function () {
-                $.mobile.defaultPageTransition = "none";
-                $.mobile.defaultDialogTransition = "none";
-                $.mobile.buttonMarkup.hoverDelay = 0;
-            });
-        </script>
-        <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-        <script src="js/platformOverrides.js"></script>
-        <script src="js/aes.js"></script>
-        <script src="js/pbkdf2.js"></script>
-        <script src="js/model/provider.js"></script>
-        <script src="js/model/yopass.js"></script>
-        <script src="js/model/password.js"></script>
-        <script src="js/model/wallet.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+            <script src="cordova.js"></script>
+            <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+            <script type="text/javascript" id="jqm-trans-disable">
+                /* For having a faster transition */
+                $(document).on("mobileinit", function () {
+                    $.mobile.defaultPageTransition = "none";
+                    $.mobile.defaultDialogTransition = "none";
+                    $.mobile.buttonMarkup.hoverDelay = 0;
+                });
+            </script>
+            <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+            <script src="js/jquery.csv.min.js"></script>
+            <script src="js/platformOverrides.js"></script>
+            <script src="js/aes.js"></script>
+            <script src="js/pbkdf2.js"></script>
+            <script src="js/model/provider.js"></script>
+            <script src="js/model/yopass.js"></script>
+            <script src="js/model/password.js"></script>
+            <script src="js/model/wallet.js"></script>
+            <script src="js/index.js"></script>
+</body>
 </html>

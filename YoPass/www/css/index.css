@@ -23,3 +23,38 @@ input, textarea {
     -ms-user-select: auto !important;
     user-select: auto !important;
 }
+
+.one-third {
+    width: 32.7%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    display: inline-block;
+}
+
+.one-third a.ui-btn {
+    display: block;
+    width: 74%;
+}
+
+.password h2 {
+    border-top: 1px solid lightGray;
+    padding-top: 0.3em;
+}
+
+.password .name-container .username {
+    color: lightGray;
+    font-weight: normal;
+    font-family: monospace;
+    text-align: right;
+    width: 100%;
+    display: block;
+}
+
+.password .links .ui-controlgroup-controls  {
+    display: block;
+}
+
+.ui-footer .ui-controlgroup-controls {
+    width: 99%;
+}

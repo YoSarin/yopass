@@ -1,6 +1,20 @@
-﻿function YoPass() {
+﻿console.log("yopass.js");
+
+function YoPass() {
     var __self__ = this;
-    this._provider = new Provider('YoPass', { 'wallet': { 'name': 'text', 'encryptedKey': 'text', 'data': 'text' } });
+    this._provider = new Provider(
+        'YoPass', {
+            'wallet': { 'name': 'text', 'encryptedKey': 'text', 'data': 'text' },
+        },
+        [
+            {
+                "version": 0.1,
+                "commands": [
+                    // "ALTER TABLE wallet ADD COLUMN fingerprint_enabled boolean DEFAULT false;",
+                ],
+            },
+        ]
+    );
 
     this.query = function (q, params, success, error) {
         __self__._provider.query(q, params, success, error);

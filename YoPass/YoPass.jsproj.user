@@ -10,7 +10,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <DebuggerFlavor>AndroidEmulator</DebuggerFlavor>
-    <AndroidEmulatorID>AndroidEmulator;Google Android Emulator</AndroidEmulatorID>
+    <AndroidEmulatorID>AndroidDevice;Device</AndroidEmulatorID>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Windows Phone 8'">
     <DebuggerFlavor>PhoneDevice</DebuggerFlavor>
@@ -29,5 +29,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Windows Phone (Universal)'">
     <DebuggerFlavor>PhoneDevice81</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-x64'">
+    <DebuggerFlavor>WindowsLocal</DebuggerFlavor>
   </PropertyGroup>
 </Project>

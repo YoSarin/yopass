@@ -1,0 +1,46 @@
+{
+  "name": "cordova-plugin-fingerprint-aio",
+  "version": "1.3.4",
+  "description": "Cordova plugin to use fingerprint authentication on Android and iOS",
+  "cordova": {
+    "id": "cordova-plugin-fingerprint-aio",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niklasmerz/cordova-plugin-fingerprint-aio"
+  },
+  "keywords": [
+    "cordova",
+    "plugin",
+    "android",
+    "fingerprint",
+    "authentication",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "ios"
+  ],
+  "author": "Niklas Merz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/niklasmerz/cordova-plugin-fingerprint-aio/issues"
+  },
+  "homepage": "https://github.com/niklasmerz/cordova-plugin-fingerprint-aio#readme",
+  "dependencies": {
+    "cordova-plugin-add-swift-support": "^1.7.0"
+  },
+  "devDependencies": {
+    "cordova-paramedic": "^0.5.0",
+    "cordova-plugin-xml": "^0.1.2",
+    "eslint": "^4.8.0",
+    "jasmine": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/cordova-paramedic/main.js --plugin . --device --platform",
+    "plugin-version": "cordova-plugin-xml setVersion"
+  }
+}

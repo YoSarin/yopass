@@ -5,13 +5,19 @@
 (function () {
     "use strict";
 
+    console.log("start");
+
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     function onDeviceReady() {
+        console.log("onready");
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
-        document.addEventListener("backbutton", function () { window.history.back(); }, false);
+        document.addEventListener("backbutton", function () {
+            return; // it causes some trouble when uploading/adding data (double upload)
+            window.history.back();
+        }, false);
 
         $(document).bind('mobileinit', function () {
             $.mobile.loader.prototype.options.text = "loading";
@@ -63,6 +69,11 @@
             $("#editPassword input").first().focus();
         });
 
+        $('#list').on('pagehide', function (ev) {
+            $("#list .ui-content .data").html("");
+            $("#list h1").text("");
+        });
+
         $('#list').on('pagebeforeshow', function (event) {
             if ($('#walletList').val() === null || !$('#password').val()) {
                 $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
@@ -82,14 +93,16 @@
                                 navigator.notification.alert("Password: " + p.getPassword(), function () {}, "Keep it safe!");
                             });
                             $(html).find('.username').text(p.getUsername());
-                            if (typeof Windows.ApplicationModel.DataTransfer.Clipboard !== 'undefined') {
-                                $(html).find('.copy').click(function () {
-                                    var clipboard = Windows.ApplicationModel.DataTransfer.Clipboard;
-                                    var content = Windows.ApplicationModel.DataTransfer.DataPackage();
-                                    content.setText(p.getPassword());
-                                    clipboard.setContent(content);
-                                });
-                            }
+                            $(html).find('.copy').click(function () {
+                                cordova.plugins.clipboard.copy(
+                                    p.getPassword(),
+                                    function () { navigator.notification.alert("Now you have password in your clipboard 😊"); },
+                                    function (err) {
+                                        navigator.notification.alert("Clipboard does not work as expected 😢");
+                                        console.error(err);
+                                    }
+                                );
+                            });
                             $(html).find('.edit').click(function () {
                                 fillPasswordForm(p);
                                 $(':mobile-pagecontainer').pagecontainer('change', $('#editPassword'));
@@ -113,7 +126,7 @@
                         });
                         $('#list .data').trigger('create');
                     } catch (e) {
-                        console.log(e);
+                        console.error(e);
                         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
                     }
                 });
@@ -128,7 +141,12 @@
                     wallet.decrypt(pass);
 
                     var dataText = $('#dataToLoad').val();
-                    var data = $.parseJSON(dataText);
+                    var data = {};
+                    try {
+                        data = $.parseJSON(dataText);
+                    } catch (e) {
+                        data = $.csv.toObjects(dataText);
+                    }
                     $.each(data, function (k, val) {
                         wallet.addPassword(Password.fromDict(val));
                     });
@@ -136,6 +154,7 @@
                     wallet.save(YoPass.DB(), function () {
                         $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
                     });
+                    $('#dataToLoad').val("");
                 });
             } catch (e) {
                 console.log(e);
@@ -163,7 +182,7 @@
                 YoPass.DB().query(
                     'INSERT INTO wallet (name, encryptedKey, data) VALUES (?,?,?)',
                     [name, encryptedKey, encryptedData],
-                    function (db, result) {
+                    function (result) {
                         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
                     }
                 );
@@ -182,7 +201,7 @@
                 Wallet.delete(
                     YoPass.DB(),
                     parseInt($("#walletList").val()),
-                    function (db, result) { // success
+                    function (result) { // success
                         $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
                     }
                 );
@@ -230,7 +249,7 @@
         YoPass.DB().query(
             'SELECT id_wallet as id, name, encryptedKey as key, data FROM wallet',
             [], 
-            function (db, result) { // success
+            function (result) { // success
                 var wallets = [];
                 for (var i = 0; i < result.rows.length; i++) {
                     var item = result.rows.item(i);
@@ -276,7 +295,7 @@
                 if (key === 'username' && item === '' && usernames.length > 0) {
                     var select = $('<select>', { name: sanitizedKey, rel: key }).appendTo('#editPassword form');
                     $.each(usernames, function (key, username) {
-                        $('<option>', { value: username, text: username }).appendTo(select);
+                        $('<option>', { value: username.name, text: username.name }).appendTo(select);
                     });
                     var newUser = $('<option>', { text: "new username" }).appendTo(select);
                     select.change(function () {

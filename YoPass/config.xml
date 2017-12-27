@@ -104,4 +104,13 @@
   </vs:platformSpecificValues>
   <plugin name="cordova-sqlite-storage" version="2.0.2" />
   <plugin name="cordova-plugin-dialogs" version="1.3.1" />
+  <vs:toolsetVersion>6.3.1</vs:toolsetVersion>
+  <engine name="android" spec="5.2.1" />
+  <engine name="ios" spec="4.2.0" />
+  <engine name="windows" spec="4.4.2" />
+  <preference name="android-minSdkVersion" value="14" />
+  <plugin name="com.verso.cordova.clipboard" spec="~0.1.0" src="https://github.com/YoSarin/CordovaClipboard" />
+  <plugin name="cordova-plugin-secure-storage" spec="~2.6.8" src="https://github.com/Crypho/cordova-plugin-secure-storage" />
+  <plugin name="cordova-plugin-fingerprint-aio" spec="~1.3.4" src="https://github.com/niklasmerz/cordova-plugin-fingerprint-aio" />
+  <plugin name="cordova-plugin-add-swift-support" spec="~1.7.0" />
 </widget>

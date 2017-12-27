@@ -22,5 +22,40 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.verso.cordova.clipboard": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/YoSarin/CordovaClipboard",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-secure-storage": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Crypho/cordova-plugin-secure-storage",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-fingerprint-aio": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/niklasmerz/cordova-plugin-fingerprint-aio",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-add-swift-support": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-add-swift-support"
+        },
+        "is_top_level": false,
+        "variables": {}
     }
 }
