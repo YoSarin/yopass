@@ -100,6 +100,11 @@
             </div>
         </div>
 
+        <div data-role="page" id="downloadData">
+          <textarea id="downloadDataOutput">
+          </textarea>
+        </div>
+
         <div data-role="page" id="list">
             <div data-role="header">
                 <h1></h1>
@@ -110,14 +115,17 @@
             </div>
             <div data-role="footer" data-position="fixed">
                 <div data-role="controlgroup" data-type="horizontal">
-                    <div class="one-third">
-                        <a href="#addPassword" data-role="button" data-icon="plus">Add record</a>
+                    <div class="one-quarter">
+                        <a href="#addPassword" data-role="button" data-icon="plus">Add</a>
                     </div>
-                    <div class="one-third">
-                        <a class="close-wallet" href="#login" data-role="button" data-icon="back">Close Wallet</a>
+                    <div class="one-quarter">
+                        <a class="close-wallet" href="#login" data-role="button" data-icon="back">Close</a>
                     </div>
-                    <div class="one-third">
-                        <a href="#uploadData" data-role="button" data-icon="back">Add from JSON/CSV</a>
+                    <div class="one-quarter">
+                        <a href="#uploadData" data-role="button" data-icon="back">Import</a>
+                    </div>
+                    <div class="one-quarter">
+                        <a href="#downloadData" data-role="button" data-icon="">Export</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 ﻿// For an introduction to the Blank template, see the following documentation:
 // http://go.microsoft.com/fwlink/?LinkID=397704
-// To debug code on page load in Ripple or on Android devices/emulators: launch your app, set breakpoints, 
+// To debug code on page load in Ripple or on Android devices/emulators: launch your app, set breakpoints,
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
@@ -133,7 +133,16 @@
             });
         });
 
-        
+
+        $('#downloadData').on('pagebeforeshow', function (event) {
+          loadWallet(function (wallet) {
+              var pass = $('#password').val();
+              wallet.decrypt(pass);
+              $('#downloadDataOutput').val(JSON.stringify(wallet.passwords()));
+            });
+        });
+
+
         $('#loadPasswords').on('pagebeforeshow', function (event) {
             try {
                 loadWallet(function (wallet) {
@@ -191,7 +200,7 @@
                 $(':mobile-pagecontainer').pagecontainer('change', $('#newWallet'));
             }
         });
-        
+
         $('#newWallet').on('pageshow', function (event) {
             $("#newWallet input").first().focus();
         });
@@ -248,7 +257,7 @@
     function loadData(callback) {
         YoPass.DB().query(
             'SELECT id_wallet as id, name, encryptedKey as key, data FROM wallet',
-            [], 
+            [],
             function (result) { // success
                 var wallets = [];
                 for (var i = 0; i < result.rows.length; i++) {
