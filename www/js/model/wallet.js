@@ -58,6 +58,10 @@
         return this._passwords;
     };
 
+    this.passwordsExport = function () {
+        return this._passwords.map(function (pass) { return pass.dict(); });
+    };
+
     this.decrypt = function (pass) {
         var decryptedKey = $.parseJSON(CryptoJS.AES.decrypt(this._keyEncrypted, pass).toString(CryptoJS.enc.Utf8));
         if (this._dataEncrypted) {

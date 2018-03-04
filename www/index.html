@@ -108,6 +108,9 @@
         <div data-role="page" id="list">
             <div data-role="header">
                 <h1></h1>
+                <div class="search">
+                  <input name="pattern" class="pattern" type="text">
+                </div>
             </div>
 
             <div role="main" class="ui-content">
@@ -122,10 +125,10 @@
                         <a class="close-wallet" href="#login" data-role="button" data-icon="back">Close</a>
                     </div>
                     <div class="one-quarter">
-                        <a href="#uploadData" data-role="button" data-icon="back">Import</a>
+                        <a href="#uploadData" data-role="button" data-icon="arrow-d">Import</a>
                     </div>
                     <div class="one-quarter">
-                        <a href="#downloadData" data-role="button" data-icon="">Export</a>
+                        <a href="#downloadData" data-role="button" data-icon="arrow-u">Export</a>
                     </div>
                 </div>
             </div>
@@ -200,7 +203,7 @@
                         <a class="copy" data-role="button" data-icon="star">To Clipboard</a>
                     </div>
                     <div class="one-third">
-                        <a class="edit" data-role="button" data-icon="gear">Edit</a>
+                        <a class="edit" data-role="button" data-icon="edit">Edit</a>
                     </div>
                     <div class="one-third">
                         <a class="remove" data-role="button" data-icon="delete">Delete</a>

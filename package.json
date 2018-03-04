@@ -10,6 +10,7 @@
     "cordova-plugin-dialogs": "1.3.1",
     "cordova-plugin-fingerprint-aio": "~1.3.4",
     "cordova-plugin-secure-storage": "~2.6.8",
+    "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-whitelist": "1",
     "cordova-sqlite-storage": "2.0.2",
     "cordova-windows": "4.4.2"
@@ -27,7 +28,8 @@
       "com.verso.cordova.clipboard": {},
       "cordova-plugin-secure-storage": {},
       "cordova-plugin-fingerprint-aio": {},
-      "cordova-plugin-add-swift-support": {}
+      "cordova-plugin-add-swift-support": {},
+      "cordova-plugin-splashscreen": {}
     }
   }
 }

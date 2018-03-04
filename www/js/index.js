@@ -7,6 +7,8 @@
 
     console.log("start");
 
+    var backButtonCallback = function() { console.log('default go back callback, does nothing'); };
+
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     function onDeviceReady() {
@@ -15,9 +17,8 @@
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
         document.addEventListener("backbutton", function () {
-            return; // it causes some trouble when uploading/adding data (double upload)
-            window.history.back();
-        }, false);
+            return backButtonCallback();
+        }.bind(this), false);
 
         $(document).bind('mobileinit', function () {
             $.mobile.loader.prototype.options.text = "loading";
@@ -79,12 +80,35 @@
                 $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
                 return;
             }
+            backButtonCallback = function() {
+              $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
+            }
             loadData(function (wallets) {
                 loadWallet(function (wallet) {
                     try {
                         var pass = $('#password').val();
                         wallet.decrypt(pass);
                         $('#list h1').html(wallet.name());
+                        $('#list h1').on('click', function () {
+                          $('#list .search').toggle();
+                          if ($('#list .search').is(':hidden')) {
+                            $('#list .search .pattern').val('').change();
+                          } else {
+                            $('#list .search .pattern').focus();
+                          }
+                        });
+                        $('#list .search .pattern').on("change paste keyup", function () {
+                          var pattern = $(this).val();
+                          var re = new RegExp(pattern, 'i');
+                          $('#list .data .password').each(function () {
+                            var name = $(this).find('.name').text();
+                            if (pattern == "" || re.test(name)) {
+                              $(this).show();
+                            } else {
+                              $(this).hide();
+                            }
+                          });
+                        });
                         $('#list .data').html('');
                         $.each(wallet.passwords(), function (key, p) {
                             var html = $("#templates .password").clone();
@@ -135,10 +159,13 @@
 
 
         $('#downloadData').on('pagebeforeshow', function (event) {
+          backButtonCallback = function() {
+            $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
+          }
           loadWallet(function (wallet) {
               var pass = $('#password').val();
               wallet.decrypt(pass);
-              $('#downloadDataOutput').val(JSON.stringify(wallet.passwords()));
+              $('#downloadDataOutput').val(JSON.stringify(wallet.passwordsExport()));
             });
         });
 

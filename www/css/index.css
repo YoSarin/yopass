@@ -24,15 +24,19 @@ input, textarea {
     user-select: auto !important;
 }
 
-.one-quarter {
-    width: 24.6%;
+.one-quarter, .one-third {
+    width: 24.3%;
     padding: 0px;
     margin: 0px;
     border: 0px;
     display: inline-block;
 }
 
-.one-quarter a.ui-btn {
+.one-third {
+  width: 32.7%;
+}
+
+.one-quarter a.ui-btn, .one-third a.ui-btn {
     display: block;
     width: 74%;
 }
@@ -57,4 +61,19 @@ input, textarea {
 
 .ui-footer .ui-controlgroup-controls {
     width: 99%;
+}
+
+#list h1 {
+  background-image: url("../js/images/icons-png/search-black.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right center;
+}
+
+.search {
+  display: none;
+}
+
+#downloadDataOutput {
+  min-height: 720px;
 }
