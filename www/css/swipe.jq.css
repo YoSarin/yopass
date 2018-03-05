@@ -1,0 +1,48 @@
+.swipeable {
+  position: relative;
+}
+
+.swipeable .item {
+  z-index: 10;
+  position: relative;
+  background-color: #f9f9f9;
+}
+
+.swipeable .swipe-menu {
+   z-index: 9;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.swipeable .swipe-menu a.ui-btn {
+    width: 68px;
+    margin: 0px;
+    float: right;
+    border: none;
+    height: 30px;
+    line-height: 40px;
+}
+.swipeable .swipe-menu a.delete-btn,
+.swipeable .swipe-menu a.delete-btn:active,
+.swipeable .swipe-menu a.delete-btn:visited,
+.swipeable .swipe-menu a.delete-btn:focus,
+.swipeable .swipe-menu a.delete-btn:hover {
+    color: white;
+    background-color: red;
+    text-shadow: none;
+}
+.swipe-menu a.ui-btn.pull-left {
+    float: left;
+}
+.swipeable .swipe-menu a.edit-btn,
+.swipeable .swipe-menu a.edit-btn:active,
+.swipeable .swipe-menu a.edit-btn:visited,
+.swipeable .swipe-menu a.edit-btn:focus,
+.swipeable .swipe-menu a.edit-btn:hover {
+    color: white;
+    background-color: orange;
+    text-shadow: none;
+}

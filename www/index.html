@@ -12,6 +12,7 @@
 
         <!-- YoPass references -->
         <link href="css/index.css" rel="stylesheet" />
+        <link href="css/swipe.jq.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom.structure.min.css" />
         <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom.theme.min.css" />
         <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom.icons.min.css" />
@@ -194,21 +195,14 @@
         <div class="hidden" id="templates">
             <option class="walletItem" value="test">Option title</option>
             <div class="password">
-                <h2 class="name-container">
-                    <span class="name">Name</span>
-                    <small class="username"></small>
-                </h2>
-                <div class="links" data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <div class="one-third">
-                        <a class="copy" data-role="button" data-icon="star">To Clipboard</a>
-                    </div>
-                    <div class="one-third">
-                        <a class="edit" data-role="button" data-icon="edit">Edit</a>
-                    </div>
-                    <div class="one-third">
-                        <a class="remove" data-role="button" data-icon="delete">Delete</a>
-                    </div>
-                </div>
+              <div class="swipe-menu">
+                  <a class="edit ui-btn edit-btn pull-left" data-icon="edit">Edit</a>
+                  <a class="remove ui-btn delete-btn" data-icon="delete">Delete</a>
+              </div>
+              <h2 class="item name-container">
+                  <span class="name">Name</span>
+                  <small class="username"></small>
+              </h2>
             </div>
 
             <script src="cordova.js"></script>
@@ -222,6 +216,8 @@
                 });
             </script>
             <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+            <script type="text/javascript" src="js/swipe.jq.js"></script>
+            <script type="text/javascript" src="js/hold.jq.js"></script>
             <script src="js/jquery.csv.min.js"></script>
             <script src="js/platformOverrides.js"></script>
             <script src="js/aes.js"></script>

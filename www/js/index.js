@@ -113,11 +113,11 @@
                         $.each(wallet.passwords(), function (key, p) {
                             var html = $("#templates .password").clone();
                             $(html).find('.name').text(p.getTitle());
-                            $(html).find('.name').dblclick(function () {
+                            $(html).find('.name').hold(function () {
                                 navigator.notification.alert("Password: " + p.getPassword(), function () {}, "Keep it safe!");
-                            });
+                            }, 500);
                             $(html).find('.username').text(p.getUsername());
-                            $(html).find('.copy').click(function () {
+                            $(html).find('.name').dblclick(function () {
                                 cordova.plugins.clipboard.copy(
                                     p.getPassword(),
                                     function () { navigator.notification.alert("Now you have password in your clipboard 😊"); },
@@ -148,6 +148,7 @@
                             });
                             $('#list .data').append(html);
                         });
+                        $('#list .data .password').swipeable();
                         $('#list .data').trigger('create');
                     } catch (e) {
                         console.error(e);
