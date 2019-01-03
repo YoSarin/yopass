@@ -6,7 +6,14 @@
     __self__._tables = tables;
     __self__._tables["_metadata"] = { "app_version": "float", "provider_version": "float" };
     __self__._updates = {
-        "app": updates, "provider": []
+        "app": updates, "provider": [
+            {
+                "version": 0.1,
+                "commands": [
+                    "INSERT INTO _metadata(app_version, provider_version) VALUES(0.0, 0.0);",
+                ],
+            }
+        ]
     };
     __self__._readyList = [];
     __self__._ready = false;
@@ -47,9 +54,9 @@
             [],
             function (data) {
                 if (data.rows.item(0)) {
+                    console.log("CurrentVersion: " + data.rows.item(0).app_version);
                     success(data.rows.item(0).app_version);
                 }
-                success(0.0);
             },
             function (err) {
                 success(0.0);
@@ -76,6 +83,7 @@
         var maxVersion = currVersion;
         $(this._updates[target].sort(function (a, b) { return a["version"] - b["version"]; })).each(function (_, item) {
             if (item["version"] > currVersion) {
+                console.log("YoPass: updating database to version " + item["version"]);
                 queries = queries.concat(item["commands"]);
                 maxVersion = item["version"];
             }
@@ -102,14 +110,14 @@
         var d = new Date();
         var start = d.getTime();
         var ident = Password.generate({ flags: Password.flags.alnum(), len: 8 });
-        console.log('START', ident, q, params);
+        console.log('START:' + ident + ":" + q + ":" + JSON.stringify(params));
 
         this.db().executeSql(
             q, params,
             function (result) {
                 var d = new Date();
                 var duration = d.getTime() - start;
-                console.log('OK', ident, "duration", duration, q, result);
+                console.log('OK:' + ident + ":duration:" + duration + ":" + q + ":" + JSON.stringify(result));
                 if (succ) {
                     succ(result);
                 }
@@ -118,8 +126,8 @@
             function (e) {
                 var d = new Date();
                 var duration = d.getTime() - start;
-                console.log('ERROR', ident, "duration", duration, q, e);
-                if (err) {
+                console.log('ERROR:' + ident + ":duration:" + duration + ":" + q + ":" + JSON.stringify(e));
+                if (e) {
                     err(e);
                 }
                 return false;

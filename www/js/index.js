@@ -174,24 +174,29 @@
         $('#loadPasswords').on('pagebeforeshow', function (event) {
             try {
                 loadWallet(function (wallet) {
-                    var pass = $('#password').val();
-                    wallet.decrypt(pass);
-
-                    var dataText = $('#dataToLoad').val();
-                    var data = {};
                     try {
-                        data = $.parseJSON(dataText);
+                        var pass = $('#password').val();
+                        wallet.decrypt(pass);
+
+                        var dataText = $('#dataToLoad').val();
+                        var data = {};
+                        try {
+                            data = $.parseJSON(dataText);
+                        } catch (e) {
+                            data = $.csv.toObjects(dataText);
+                        }
+                        $.each(data, function (k, val) {
+                            wallet.addPassword(Password.fromDict(val));
+                        });
+                        wallet.encrypt(pass);
+                        wallet.save(YoPass.DB(), function () {
+                            $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
+                        });
                     } catch (e) {
-                        data = $.csv.toObjects(dataText);
+                        alert(e);
+                    } finally {
+                        $('#dataToLoad').val("");
                     }
-                    $.each(data, function (k, val) {
-                        wallet.addPassword(Password.fromDict(val));
-                    });
-                    wallet.encrypt(pass);
-                    wallet.save(YoPass.DB(), function () {
-                        $(':mobile-pagecontainer').pagecontainer('change', $('#list'));
-                    });
-                    $('#dataToLoad').val("");
                 });
             } catch (e) {
                 console.log(e);

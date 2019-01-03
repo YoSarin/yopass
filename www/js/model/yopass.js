@@ -10,7 +10,13 @@ function YoPass() {
             {
                 "version": 0.1,
                 "commands": [
-                    // "ALTER TABLE wallet ADD COLUMN fingerprint_enabled boolean DEFAULT false;",
+                    "ALTER TABLE wallet ADD COLUMN fingerprint_enabled boolean DEFAULT false;",
+                ],
+            },
+            {
+                "version": 0.2,
+                "commands": [
+                    "SELECT * FROM _metadata;",
                 ],
             },
         ]

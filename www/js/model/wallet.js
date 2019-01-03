@@ -87,10 +87,18 @@
     };
 
     this.save = function (db, callback) {
-        if (this._id) {
-            db.query('UPDATE wallet SET name=?, encryptedKey=?, data=?, fingerprint_enabled = ? WHERE id_wallet=?', [this._name, this._keyEncrypted, this._dataEncrypted, this._fingerprintEnabled, this._id], callback);
-        } else {
-            db.query('INSERT INTO wallet (name, encryptedKey, data, fingerprint_enabled) VALUES (?,?,?,?)', [this._name, this._keyEncrypted, this._dataEncrypted, this._fingerprintEnabled], callback);
+        try {
+            if (this._id) {
+                db.query('UPDATE wallet SET name=?, encryptedKey=?, data=?, fingerprint_enabled = ? WHERE id_wallet=?', [this._name, this._keyEncrypted, this._dataEncrypted, this._fingerprintEnabled, this._id], callback);
+            } else {
+                db.query('INSERT INTO wallet (name, encryptedKey, data, fingerprint_enabled) VALUES (?,?,?,?)', [this._name, this._keyEncrypted, this._dataEncrypted, this._fingerprintEnabled], callback);
+            }
+        } catch (e) {
+            console.log(e);
+            alert(e);
+            navigator.notification.alert("Sorry, something is broken :(", function () {
+                $(':mobile-pagecontainer').pagecontainer('change', $('#login'));
+            }, "It is broken!");
         }
     };
 }
